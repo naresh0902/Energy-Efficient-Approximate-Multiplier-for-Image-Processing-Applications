@@ -220,7 +220,7 @@ Chakraborty et al.
 
 ## 👨‍💻 Author
 
-Naresh Godara
+Naresh Godara, Siddharth Khandelwal, Anushka Mishra, Rishu Kumar
 
 ---
 
