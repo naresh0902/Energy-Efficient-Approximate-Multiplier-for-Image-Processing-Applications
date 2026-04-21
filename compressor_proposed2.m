@@ -8,7 +8,7 @@ function [Sum, Carry] = compressor_proposed2(Y1, Y2, Y3, Y4)
 %
 % Errors occur when input has 2 or 4 ones.
 % Total error probability = 55/256.
-% Higher error rate but lower hardware cost than Design 1.
+% Higher error rate but lower hardware cost than Design 1
 %
 % Inputs:
 %   Y1, Y2, Y3, Y4 - Raw input bits before reordering
