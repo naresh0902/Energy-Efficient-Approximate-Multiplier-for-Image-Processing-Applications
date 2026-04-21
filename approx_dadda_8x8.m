@@ -18,7 +18,7 @@ function result = approx_dadda_8x8(A, B, compressor_type)
 %   result - integer product (approximate or exact)
 
     A = double(uint8(A));
-    B = double(uint8(B));
+    B = double(int8(B));
 
     % -----------------------------------------------------------
     % Step 1: Build partial product columns
