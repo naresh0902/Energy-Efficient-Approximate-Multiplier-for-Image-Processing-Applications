@@ -28,15 +28,17 @@ The implementation reproduces:
 * Approximate Computing
 * 4:2 Compressors
 * Dadda Multiplier Architecture
-* Error Metrics:
 
-  * Error Rate (ER)
-  * Mean Error Distance (MED)
-  * Mean Relative Error Distance (MRED)
-  * Normalized Error Distance (NED)
-* Image Quality Metric:
+### Error Metrics:
 
-  * MSSIM (Mean Structural Similarity Index)
+* Error Rate (ER)
+* Mean Error Distance (MED)
+* Mean Relative Error Distance (MRED)
+* Normalized Error Distance (NED)
+
+### Image Quality Metric:
+
+* MSSIM (Mean Structural Similarity Index)
 
 ---
 
@@ -48,39 +50,39 @@ The implementation reproduces:
 * `exact_compressor.m` – Accurate 4:2 compressor
 * `compressor_proposed1.m` – Proposed Design 1
 * `compressor_proposed2.m` – Proposed Design 2
-* `literature_compressors.m` – Existing designs for comparison
-* `approx_dadda_8x8.m` – Full multiplier implementation
+* `literature_compressors.m` – Existing designs
+* `approx_dadda_8x8.m` – Full multiplier
 
 ---
 
 ### 🔹 Evaluation Modules
 
-* `compute_accuracy_metrics.m` – Calculates Table 4 metrics
-* `compute_mssim.m` – Computes MSSIM
-* `image_convolve_approx.m` – Approximate convolution
-* `image_multiply_approx.m` – Approximate multiplication
-* `image_convolve_exact.m` – Ground truth reference
+* `compute_accuracy_metrics.m` – Table 4 metrics
+* `compute_mssim.m` – MSSIM computation
+* `image_convolve_approx.m` – Approx convolution
+* `image_multiply_approx.m` – Approx multiplication
+* `image_convolve_exact.m` – Ground truth
 
 ---
 
-### 🔹 Kernels (from paper equations)
+### 🔹 Kernels
 
-* `get_smooth_kernel.m` – Eq. (13) smoothing kernel 
-* `get_sharp_kernel.m` – Eq. (14) sharpening kernel 
+* `get_smooth_kernel.m` – Smoothing kernel
+* `get_sharp_kernel.m` – Sharpening kernel
 
 ---
 
 ### 🔹 Scripts
 
 * `test_compressors.m` – Unit testing
-* `main_run_all.m` – Full experiment pipeline 
+* `main_run_all.m` – Full experiment
 * `plot_results.m` – Visualization
 
 ---
 
 ## ⚙️ Requirements
 
-* MATLAB (R2020 or later recommended)
+* MATLAB (R2020 or later)
 * Image Processing Toolbox
 
 ---
@@ -88,13 +90,13 @@ The implementation reproduces:
 ## ▶️ How to Run
 
 ```matlab
-% Step 1: Run unit tests
+% Step 1: Run tests
 test_compressors
 
 % Step 2: Run full experiment
 main_run_all
 
-% Step 3: Generate plots
+% Step 3: Plot results
 plot_results(acc_results, img_results)
 ```
 
@@ -118,11 +120,9 @@ plot_results(acc_results, img_results)
 | Ha-Lee et al.     | 91.89  | 5312  | 192.00 | 0.0455 | 0.0030  |
 | Momeni et al.     | 96.02  | 2611  | 297.50 | 0.0649 | 0.0046  |
 
-📌 Source: Generated using `compute_accuracy_metrics.m` 
-
 ---
 
-### 🔹 Table 6 – MSSIM (Image Quality)
+### 🔹 Table 6 – MSSIM
 
 | Design            | Multiplication | Smoothing | Sharpening |
 | ----------------- | -------------- | --------- | ---------- |
@@ -137,23 +137,33 @@ plot_results(acc_results, img_results)
 | Reddy et al.      | 0.9956         | 0.9919    | 0.9967     |
 | Ha-Lee et al.     | 0.9978         | 0.9859    | 0.9957     |
 
-📌 Source: Generated using `compute_mssim.m` 
+---
+
+## 🖼️ Output Results (Figure 8)
+
+### 🔹 Image Multiplication
+
+![Multiplication](output/iteration2/fig8_multiplication.png)
 
 ---
 
-## 🖼️ Output
+### 🔹 Image Smoothing
 
-Generated outputs include:
+![Smoothing](output/iteration2/fig8_smoothing.png)
 
-* Image Multiplication
-* Image Smoothing
-* Image Sharpening
+---
 
-Saved in:
+### 🔹 Image Sharpening
 
-```
-/output_images/
-```
+![Sharpening](output/iteration2/fig8_sharpening.png)
+
+---
+
+## 🖼️ Combined View
+
+| Multiplication                                 | Smoothing                                 | Sharpening                                 |
+| ---------------------------------------------- | ----------------------------------------- | ------------------------------------------ |
+| ![](output/iteration2/fig8_multiplication.png) | ![](output/iteration2/fig8_smoothing.png) | ![](output/iteration2/fig8_sharpening.png) |
 
 ---
 
@@ -161,17 +171,15 @@ Saved in:
 
 * **Proposed Design 1**
 
-  * Better accuracy (lower MED, higher MSSIM)
-  * Suitable for quality-critical applications
+  * Higher accuracy
+  * Better image quality (higher MSSIM)
 
 * **Proposed Design 2**
 
   * Lower hardware complexity
-  * Better for power-efficient systems
+  * More power-efficient
 
-* **Trade-off**
-
-  * Accuracy vs Power vs Area
+👉 Trade-off: **Accuracy vs Efficiency**
 
 ---
 
@@ -184,21 +192,21 @@ Saved in:
 
 ---
 
-## 🧩 How It Works
+## 🧩 Working Principle
 
-1. Partial products generated (8×8 multiplication)
-2. Reduced using Dadda stages
-3. Approximate compressors used in LSB columns
-4. Exact compressors used in MSB columns
-5. Final result computed using ripple carry adder
+1. Generate partial products
+2. Apply Dadda reduction
+3. Use approximate compressors in LSB
+4. Use exact compressors in MSB
+5. Final addition via ripple carry adder
 
 ---
 
 ## 📌 Notes
 
-* If `crater.png` is missing, code uses `moon.tif` automatically 
-* Ensure all `.m` files are in the same directory
-* Results may slightly vary due to implementation differences
+* If `crater.png` is missing → `moon.tif` is used
+* Keep all `.m` files in one folder
+* Minor variation in results is normal
 
 ---
 
@@ -213,15 +221,13 @@ Chakraborty et al.
 ## 👨‍💻 Author
 
 Naresh Godara
-(Implementation + Analysis)
 
 ---
 
 ## ⭐ Future Work
 
 * FPGA implementation
-* Power-delay measurement (hardware)
-* CNN acceleration using approximate multipliers
+* Power-delay analysis
+* AI/ML acceleration using approximate multipliers
 
 ---
-
